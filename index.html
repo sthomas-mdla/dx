@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DXA Workflow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .workflow-box {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem 3rem;
+            width: 100%;
+        }
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 1.5rem;
+            width: 2px;
+            height: 1rem;
+            background-color: #cbd5e1;
+        }
+        .step-icon {
+            flex-shrink: 0;
+            width: 3rem;
+            height: 3rem;
+            background-color: #2563eb;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-right: 1.5rem;
+        }
+        .step-content {
+            flex-grow: 1;
+        }
+        .step-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 0.5rem;
+        }
+        .step-description {
+            color: #4a5568;
+            font-size: 1rem;
+        }
+        @media (max-width: 768px) {
+            .workflow-box {
+                padding: 1.5rem;
+            }
+            .step {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .step-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            .step:not(:last-child)::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+        .recommendation-list li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="container">
+        <div class="workflow-box mb-8">
+            <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Digital Experience Workflow</h1>
+            
+            <div class="step">
+                <div class="step-icon">1</div>
+                <div class="step-content">
+                    <div class="step-title">Text Signals</div>
+                    <div class="step-description">A rich representation of what’s happening on a brand’s digital experience, including transcripts, case notes, and comments.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">2</div>
+                <div class="step-content">
+                    <div class="step-title">In-the-Moment Feedback</div>
+                    <div class="step-description">Understand and prioritize issues from the vocal population based on feedback from digital experiences.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">3</div>
+                <div class="step-content">
+                    <div class="step-title">Digital Experience Analytics</div>
+                    <div class="step-description">Perform root cause analysis across all digital behaviors and actions, using text and survey signals to ask questions of broader behavioral data.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">4</div>
+                <div class="step-content">
+                    <div class="step-title">Actionable Insights</div>
+                    <div class="step-description">Determine the next best action to fix issues and proactively improve the customer experience.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">5</div>
+                <div class="step-content">
+                    <div class="step-title">DXA Platform Actions</div>
+                    <div class="step-description">Recommended actions to take within Medallia DXA to diagnose & improve digital experience.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- DXA Recommendation Section -->
+        <div class="workflow-box">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">💡 DXA Feature Recommendation</h2>
+            <p class="text-center text-gray-600 mb-6">Based on your text analysis, enter a customer issue to get recommendations for Medallia DXA features.</p>
+            
+            <div class="mb-4">
+                <textarea id="issueTextarea" class="w-full h-24 p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 resize-none" placeholder="e.g., 'Customer can't login to their account' or 'Product page is slow to load'"></textarea>
+            </div>
+            
+            <div class="flex justify-center mb-6">
+                <button id="recommendBtn" class="bg-blue-600 text-white font-semibold py-3 px-8 rounded-xl shadow-lg hover:bg-blue-700 transition duration-200">
+                    Get Recommendations
+                </button>
+            </div>
+            
+            <div id="recommendationDisplay" class="bg-gray-50 p-6 border rounded-xl text-gray-800 whitespace-pre-wrap min-h-[100px] shadow-inner">
+                Recommendations will appear here.
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const issueTextarea = document.getElementById('issueTextarea');
+            const recommendBtn = document.getElementById('recommendBtn');
+            const recommendationDisplay = document.getElementById('recommendationDisplay');
+
+            recommendBtn.addEventListener('click', () => {
+                const issue = issueTextarea.value.trim().toLowerCase();
+                let recommendations = "";
+
+                if (issue === "") {
+                    recommendations = "Please enter a customer issue to receive recommendations.";
+                } else if (issue.includes("login") || issue.includes("account") || issue.includes("password") || issue.includes("registration") || issue.includes("access") || issue.includes("checkout") || issue.includes("form")) {
+                    recommendations = `For issues related to accounts, logins, and forms, start with these DXA features:
+                    
+• Form Analytics: Automatically scores the ease and usability of forms. Use this to identify where users are struggling, such as high abandonment rates or specific field errors.
+
+• Technical Performance Reports: Check for JavaScript or HTTP errors that might be preventing the form from submitting correctly.
+
+• Session Replay: Watch video-accurate recordings of sessions to visually see exactly where the user is getting stuck or frustrated on the login page or form.`;
+                } else if (issue.includes("navigate") || issue.includes("journey") || issue.includes("search")) {
+                    recommendations = `For navigation or journey-related issues, focus on these DXA features:
+
+• Funnels & Customer Journeys: Visualize the exact path visitors take and understand where they are dropping off.
+
+• Discover Reports: Surface aggregate user behavior trends and use the filters to segment by specific journeys or page groups.
+
+• Navigation Score (part of DXS): A high navigation score indicates ease of movement through your site. A low score points to friction in the user's journey.`;
+                } else if (issue.includes("load") || issue.includes("slow") || issue.includes("technical") || issue.includes("malfunction") || issue.includes("error")) {
+                    recommendations = `For technical and performance issues like slow loading or malfunctions, use these DXA features:
+
+• Technical Performance Reports: Dive into metrics like average load time and JavaScript error rates to pinpoint the root cause of the slowness.
+
+• Behavioral Intelligence: Analyze frustration metrics like 'unresponsive clicks' and 'rapid cursor movements' to see the user's struggle as the page loads.
+
+• Session Replay: Watch sessions with a low technical score to see the user's experience in real-time and identify the moment of frustration.`;
+                } else if (issue.includes("content") || issue.includes("design") || issue.includes("layout")) {
+                    recommendations = `For issues related to content quality or design, use these DXA features:
+
+• Heatmaps: Visualize on-page engagement with behavioral, attribution, scroll, and dot heatmaps to see where users are clicking and where they are getting stuck.
+
+• Session Replay: Watch user sessions to see how visitors interact with the page's design and layout, and if they are able to find the information they are looking for.`;
+                } else if (issue.includes("chat") || issue.includes("feature")) {
+                    recommendations = `For feature-specific issues like chat functionality, use these DXA features:
+
+• Tracked Events: Monitor specific button clicks or interactions related to the feature in question.
+
+• Session Replay: Watch user sessions to see the context surrounding the use of the feature and what may be causing the problem.
+
+• Alerts: Set up real-time alerts to notify you when a user engages with the feature and encounters a problem.`;
+                } else {
+                    recommendations = "I'm sorry, I don't have a specific recommendation for that issue based on the provided content. Please try a different query, such as 'page is slow to load' or 'can't login'.";
+                }
+
+                recommendationDisplay.textContent = recommendations;
+            });
+        });
+    </script>
+
+</body>
+</html>
