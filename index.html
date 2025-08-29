@@ -224,6 +224,14 @@
 • Heatmaps: Visualize on-page engagement with behavioral, attribution, scroll, and dot heatmaps to see where users are clicking and where they are getting stuck.
 
 • Session Replay: Watch user sessions to see how visitors interact with the page's design and layout, and if they are able to find the information they are looking for.`;
+                } else if (issue.includes("navigation") || issue.includes("navigate") || issue.includes("stuck") || issue.includes("loop") || issue.includes("sucks")) {
+                    recommendations = `For issues related to navigation, use these DXA features:
+
+• Navigation Score: A session-based score that measures how easy it is for users to navigate your site. A low score here indicates a problem.
+
+• Funnels & Customer Journeys: Visualize the exact path visitors take and identify where they are getting stuck or looping back to previous pages.
+
+• Behavioral Intelligence & Session Replay: Look for specific behavioral signals like 'stuck on screen', 'stuck on screen loop', or 'go back using navigation' to pinpoint the precise moment of user frustration.`;
                 } else {
                     recommendations = `I'm sorry, I don't have a specific recommendation for that issue based on the provided content. 
 <a onclick="KAMPYLE_ONSITE_SDK.showForm(40084)" class="recommendation-link">No results? Share your query so we can improve the workflow.</a>`;
