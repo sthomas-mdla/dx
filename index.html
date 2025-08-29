@@ -225,9 +225,10 @@
 
 • Session Replay: Watch user sessions to see how visitors interact with the page's design and layout, and if they are able to find the information they are looking for.`;
                 } else {
-                    recommendations = `I'm sorry, I don't have a specific recommendation for that issue based on the provided content.`;
-                    <a onclick="KAMPYLE_ONSITE_SDK.showForm(40084)" class="recommendation-link">No results? Share your query so we can improve the workflow.</a>
+                    recommendations = `I'm sorry, I don't have a specific recommendation for that issue based on the provided content. 
+<a onclick="KAMPYLE_ONSITE_SDK.showForm(40084)" class="recommendation-link">No results? Share your query so we can improve the workflow.</a>`;
                 }
+                recommendationDisplay.innerHTML = recommendations;
             });
         });
     </script>
