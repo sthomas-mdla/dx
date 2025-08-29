@@ -100,24 +100,24 @@
             <div class="step">
                 <div class="step-icon">1</div>
                 <div class="step-content">
-                    <div class="step-title">Text Signals</div>
-                    <div class="step-description">A rich representation of what’s happening on a brand’s digital experience, including transcripts, case notes, and comments.</div>
+                    <div class="step-title">Analyze customer omnichannel text signals</div>
+                    <div class="step-description">What high-impact topics are related to digital experiences when looking across all text signals, inclusive of surveys, transcripts, call notes, and other sources?</div>
                 </div>
             </div>
 
             <div class="step">
                 <div class="step-icon">2</div>
                 <div class="step-content">
-                    <div class="step-title">In-the-Moment Feedback</div>
-                    <div class="step-description">Understand and prioritize issues from the vocal population based on feedback from digital experiences.</div>
+                    <div class="step-title">Survey Program Feedback</div>
+                    <div class="step-description">Understand and prioritize issues from the vocal population based on feedback about digital experiences.</div>
                 </div>
             </div>
 
             <div class="step">
                 <div class="step-icon">3</div>
                 <div class="step-content">
-                    <div class="step-title">Digital Experience Analytics</div>
-                    <div class="step-description">Perform root cause analysis across all digital behaviors and actions, using text and survey signals to ask questions of broader behavioral data.</div>
+                    <div class="step-title">Value Realization</div>
+                    <div class="step-description">What business outcomes is Medallia building towards with your customer?</div>
                 </div>
             </div>
 
@@ -142,10 +142,10 @@
         <!-- DXA Recommendation Section -->
         <div class="workflow-box">
             <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">💡 DXA Feature Recommendation</h2>
-            <p class="text-center text-gray-600 mb-6">Based on your text analysis, enter a customer issue to get recommendations for Medallia DXA features.</p>
+            <p class="text-center text-gray-600 mb-6">Enter a customer comment or business challenge to get recommendations for Medallia DXA features.</p>
             
             <div class="mb-4">
-                <textarea id="issueTextarea" class="w-full h-24 p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 resize-none" placeholder="e.g., 'Customer can't login to their account' or 'Product page is slow to load'"></textarea>
+                <textarea id="issueTextarea" class="w-full h-24 p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 resize-none" placeholder="e.g., 'Customer can't login to their account' or 'My telecom client needs help with service cancellations'"></textarea>
             </div>
             
             <div class="flex justify-center mb-6">
@@ -172,8 +172,8 @@
                 let recommendations = "";
 
                 if (issue === "") {
-                    recommendations = "Please enter a customer issue to receive recommendations.";
-                } else if (issue.includes("login") || issue.includes("account") || issue.includes("password") || issue.includes("registration") || issue.includes("access") || issue.includes("checkout") || issue.includes("form")) {
+                    recommendations = "Please enter a customer issue or business challenge to receive recommendations.";
+                } else if (issue.includes("login") || issue.includes("account") || issue.includes("password") || issue.includes("registration") || issue.includes("access") || issue.includes("form")) {
                     recommendations = `For issues related to accounts, logins, and forms, start with these DXA features:
                     
 • Form Analytics: Automatically scores the ease and usability of forms. Use this to identify where users are struggling, such as high abandonment rates or specific field errors.
@@ -181,15 +181,23 @@
 • Technical Performance Reports: Check for JavaScript or HTTP errors that might be preventing the form from submitting correctly.
 
 • Session Replay: Watch video-accurate recordings of sessions to visually see exactly where the user is getting stuck or frustrated on the login page or form.`;
-                } else if (issue.includes("navigate") || issue.includes("journey") || issue.includes("search")) {
-                    recommendations = `For navigation or journey-related issues, focus on these DXA features:
+                } else if (issue.includes("cancel") || issue.includes("service") || issue.includes("journey") || issue.includes("process")) {
+                    recommendations = `For business challenges related to customer journeys like service cancellations, focus on these DXA features:
 
-• Funnels & Customer Journeys: Visualize the exact path visitors take and understand where they are dropping off.
+• Funnels & Customer Journeys: Visualize the exact path visitors take and where they are dropping off in the cancellation process.
 
-• Discover Reports: Surface aggregate user behavior trends and use the filters to segment by specific journeys or page groups.
+• Session Replay: Watch sessions of users who successfully or unsuccessfully attempted to cancel to understand their experience and identify friction points.
 
-• Navigation Score (part of DXS): A high navigation score indicates ease of movement through your site. A low score points to friction in the user's journey.`;
-                } else if (issue.includes("load") || issue.includes("slow") || issue.includes("technical") || issue.includes("malfunction") || issue.includes("error")) {
+• Discover Reports: Use reports to analyze traffic sources and segments to see if specific user groups are more likely to cancel.`;
+                } else if (issue.includes("friction") || issue.includes("malfunction") || issue.includes("error") || issue.includes("stuck")) {
+                    recommendations = `To understand and resolve digital friction, use these DXA features:
+
+• Behavioral Intelligence: Analyze frustration metrics like 'unresponsive clicks', 'rapid cursor movements', and 'over-scrolling' to quantify friction.
+
+• DXS (Digital Experience Score) & Pillar Scores: Use the overall DXS and pillar scores for Frustration, Technical, and Navigation to identify pages or segments with high friction.
+
+• Session Replay: Watch sessions with low DXS scores or high frustration signals to see firsthand what is causing the struggle.`;
+                } else if (issue.includes("load") || issue.includes("slow") || issue.includes("technical")) {
                     recommendations = `For technical and performance issues like slow loading or malfunctions, use these DXA features:
 
 • Technical Performance Reports: Dive into metrics like average load time and JavaScript error rates to pinpoint the root cause of the slowness.
@@ -197,12 +205,6 @@
 • Behavioral Intelligence: Analyze frustration metrics like 'unresponsive clicks' and 'rapid cursor movements' to see the user's struggle as the page loads.
 
 • Session Replay: Watch sessions with a low technical score to see the user's experience in real-time and identify the moment of frustration.`;
-                } else if (issue.includes("content") || issue.includes("design") || issue.includes("layout")) {
-                    recommendations = `For issues related to content quality or design, use these DXA features:
-
-• Heatmaps: Visualize on-page engagement with behavioral, attribution, scroll, and dot heatmaps to see where users are clicking and where they are getting stuck.
-
-• Session Replay: Watch user sessions to see how visitors interact with the page's design and layout, and if they are able to find the information they are looking for.`;
                 } else if (issue.includes("chat") || issue.includes("feature")) {
                     recommendations = `For feature-specific issues like chat functionality, use these DXA features:
 
@@ -211,6 +213,12 @@
 • Session Replay: Watch user sessions to see the context surrounding the use of the feature and what may be causing the problem.
 
 • Alerts: Set up real-time alerts to notify you when a user engages with the feature and encounters a problem.`;
+                } else if (issue.includes("content") || issue.includes("design") || issue.includes("layout") || issue.includes("experience")) {
+                    recommendations = `For issues related to content quality or design, use these DXA features:
+
+• Heatmaps: Visualize on-page engagement with behavioral, attribution, scroll, and dot heatmaps to see where users are clicking and where they are getting stuck.
+
+• Session Replay: Watch user sessions to see how visitors interact with the page's design and layout, and if they are able to find the information they are looking for.`;
                 } else {
                     recommendations = "I'm sorry, I don't have a specific recommendation for that issue based on the provided content. Please try a different query, such as 'page is slow to load' or 'can't login'.";
                 }
@@ -219,6 +227,7 @@
             });
         });
     </script>
+<script type="text/javascript" src="https://resources.digital-cloud-west.medallia.com/wdcwest/109824/onsite/embed.js" async></script>
 
 </body>
 </html>
