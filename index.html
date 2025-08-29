@@ -89,6 +89,11 @@
         .recommendation-list li {
             margin-bottom: 0.5rem;
         }
+        .recommendation-link {
+            color: #2563eb;
+            cursor: pointer;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -220,10 +225,9 @@
 
 • Session Replay: Watch user sessions to see how visitors interact with the page's design and layout, and if they are able to find the information they are looking for.`;
                 } else {
-                    recommendations = "I'm sorry, I don't have a specific recommendation for that issue based on the provided content. Please try a different query, such as 'page is slow to load' or 'can't login'.";
+                    recommendations = `I'm sorry, I don't have a specific recommendation for that issue based on the provided content.`;
+                    <a onclick="KAMPYLE_ONSITE_SDK.showForm(40084)" class="recommendation-link">No results? Share your query so we can improve the workflow.</a>
                 }
-
-                recommendationDisplay.textContent = recommendations;
             });
         });
     </script>
