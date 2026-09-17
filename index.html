@@ -1,240 +1,478 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DXA Workflow</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8;
-            padding: 2rem;
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-        }
-        .workflow-box {
-            background-color: #ffffff;
-            border-radius: 1rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 2.5rem 3rem;
-            width: 100%;
-        }
-        .step {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 2rem;
-            position: relative;
-        }
-        .step:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            bottom: -1rem;
-            left: 1.5rem;
-            width: 2px;
-            height: 1rem;
-            background-color: #cbd5e1;
-        }
-        .step-icon {
-            flex-shrink: 0;
-            width: 3rem;
-            height: 3rem;
-            background-color: #2563eb;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.25rem;
-            margin-right: 1.5rem;
-        }
-        .step-content {
-            flex-grow: 1;
-        }
-        .step-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #1a202c;
-            margin-bottom: 0.5rem;
-        }
-        .step-description {
-            color: #4a5568;
-            font-size: 1rem;
-        }
-        @media (max-width: 768px) {
-            .workflow-box {
-                padding: 1.5rem;
-            }
-            .step {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-            .step-icon {
-                margin-right: 0;
-                margin-bottom: 1rem;
-            }
-            .step:not(:last-child)::after {
-                left: 50%;
-                transform: translateX(-50%);
-            }
-        }
-        .recommendation-list li {
-            margin-bottom: 0.5rem;
-        }
-        .recommendation-link {
-            color: #2563eb;
-            cursor: pointer;
-            text-decoration: underline;
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body class="bg-gray-100">
+<body style="margin:0">
+<title>Medallia Digital Context Engine</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
 
-    <div class="container">
-        <div class="workflow-box mb-8">
-            <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Digital Experience Workflow</h1>
-            
-            <p class="text-sm text-center text-gray-500 mb-6">Disclaimer: This is an internal Medallia workflow intended to connect text insights related to business value to recommended DXA features in support of omnichannel use cases.</p>
-            
-            <div class="step">
-                <div class="step-icon">1</div>
-                <div class="step-content">
-                    <div class="step-title">Value Realization</div>
-                    <div class="step-description">What business outcomes is Medallia building towards with your customer?</div>
-                </div>
-            </div>
+  :root{
+    --bg:#0D0F10;
+    --panel:#131619;
+    --card:#32363A;
+    --card-soft:#23262A;
+    --line:rgba(205,210,212,0.14);
+    --line-strong:rgba(205,210,212,0.24);
+    --indigo:#5B5BFF;
+    --indigo-soft:rgba(91,91,255,0.16);
+    --lime:#C8FF00;
+    --lime-soft:rgba(200,255,0,0.12);
+    --text:#FFFFFF;
+    --text-2:#CDD2D4;
+    --text-3:#8F9598;
+    --font-display:'Inter Tight', Arial, Helvetica, sans-serif;
+    --font-body:'Inter', Arial, Helvetica, sans-serif;
+  }
 
-            <div class="step">
-                <div class="step-icon">2</div>
-                <div class="step-content">
-                    <div class="step-title">Analyze customer omnichannel text signals</div>
-                    <div class="step-description">What high-impact topics are related to digital experiences when looking across all text signals, inclusive of surveys, transcripts, call notes, and other sources?</div>
-                </div>
-            </div>
+  *{box-sizing:border-box;}
+  body{
+    background:var(--bg);
+    color:var(--text-2);
+    font-family:var(--font-body);
+    margin:0;
+    padding-inline:20px;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:var(--font-display);color:var(--text);margin:0;text-wrap:balance;}
+  p{margin:0;}
+  button{font-family:inherit;}
+  ::selection{background:var(--lime);color:var(--bg);}
+  :focus-visible{outline:2px solid var(--lime);outline-offset:2px;}
 
-            <div class="step">
-                <div class="step-icon">3</div>
-                <div class="step-content">
-                    <div class="step-title">Survey Program Feedback</div>
-                    <div class="step-description">Understand and prioritize issues from the vocal population based on feedback about digital experiences.</div>
-                </div>
-            </div>
+  .shell{max-width:1080px;margin:0 auto;}
 
-            <div class="step">
-                <div class="step-icon">4</div>
-                <div class="step-content">
-                    <div class="step-title">DXA Platform Actions</div>
-                    <div class="step-description">Recommended actions to take within Medallia DXA to diagnose & improve digital experience.</div>
-                </div>
-            </div>
+  /* ---------- top bar ---------- */
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:wrap;
+    padding-block:28px 20px;
+    border-bottom:1px solid var(--line);
+  }
+  .wordmark{display:flex;flex-direction:column;gap:2px;}
+  .wordmark .name{font-family:var(--font-display);font-size:19px;font-weight:600;color:var(--text);}
+  .wordmark .name b{font-weight:700;}
+  .wordmark .tool{font-size:13px;color:var(--text-3);}
+  .committee-tag{
+    font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--text-3);
+    border:1px solid var(--line-strong);
+    border-radius:999px;
+    padding:7px 14px;
+    white-space:nowrap;
+  }
 
-        </div>
+  /* ---------- step nav ---------- */
+  .stepnav{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding-block:20px;
+    flex-wrap:wrap;
+  }
+  .step-pill{
+    display:flex;align-items:center;gap:9px;
+    border-radius:999px;
+    border:1px solid var(--line-strong);
+    background:var(--panel);
+    color:var(--text-2);
+    padding:9px 16px 9px 10px;
+    cursor:pointer;
+    font-size:14px;
+    transition:background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .step-pill .num{
+    width:22px;height:22px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-display);font-weight:700;font-size:12px;
+    background:var(--card);color:var(--text-2);
+    flex:none;
+  }
+  .step-pill[aria-selected="true"]{
+    background:var(--lime);
+    color:var(--bg);
+    border-color:var(--lime);
+  }
+  .step-pill[aria-selected="true"] .num{background:var(--bg);color:var(--lime);}
+  .step-pill:not([aria-selected="true"]):hover{border-color:var(--indigo);color:var(--text);}
+  .step-arrow{color:var(--text-3);font-size:14px;}
 
-        <!-- DXA Recommendation Section -->
-        <div class="workflow-box">
-            <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">💡 DXA Feature Recommendation</h2>
-            <p class="text-center text-gray-600 mb-6">Enter a customer comment or business challenge to get recommendations for Medallia DXA features.</p>
-            
-            <div class="mb-4">
-                <textarea id="issueTextarea" class="w-full h-24 p-4 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 resize-none" placeholder="e.g., 'Customer can't login to their account' or 'My telecom client needs help with service cancellations'"></textarea>
-            </div>
-            
-            <div class="flex justify-center mb-6">
-                <button id="recommendBtn" class="bg-blue-600 text-white font-semibold py-3 px-8 rounded-xl shadow-lg hover:bg-blue-700 transition duration-200">
-                    Get Recommendations
-                </button>
-            </div>
-            
-            <div id="recommendationDisplay" class="bg-gray-50 p-6 border rounded-xl text-gray-800 whitespace-pre-wrap min-h-[100px] shadow-inner">
-                Recommendations will appear here.
-            </div>
+  main{padding-block:8px 64px;}
+  .panel{display:flex;flex-direction:column;gap:34px;}
 
-        </div>
+  .eyebrow{
+    font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--indigo);font-weight:600;
+  }
+  .headline{font-size:clamp(26px,4vw,38px);font-weight:600;line-height:1.08;margin-top:8px;}
+  .dek{font-size:17px;color:var(--text-2);line-height:1.55;max-width:640px;margin-top:12px;}
+
+  .head-block{padding-top:10px;}
+
+  /* ---------- callout ---------- */
+  .callout{
+    background:var(--panel);
+    border-left:3px solid var(--indigo);
+    border-radius:10px;
+    padding:18px 20px;
+    font-size:15.5px;
+    line-height:1.6;
+    color:var(--text-2);
+  }
+  .callout b{color:var(--text);}
+  .callout + .callout{margin-top:0;}
+
+  /* ---------- focus : quadrant ---------- */
+  .quad-wrap{display:flex;flex-direction:column;gap:6px;}
+  .axis-top,.axis-bottom{
+    text-align:center;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);font-weight:600;
+  }
+  .quad-row{display:flex;align-items:stretch;gap:6px;}
+  .axis-side{
+    writing-mode:vertical-rl;
+    transform:rotate(180deg);
+    font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);font-weight:600;
+    display:flex;align-items:center;justify-content:center;
+    flex:none;width:18px;
+  }
+  .quad-grid{
+    flex:1;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:1fr 1fr;
+    gap:12px;
+  }
+  @media (max-width:640px){
+    .quad-grid{grid-template-columns:1fr;}
+    .axis-side{display:none;}
+  }
+  .quad{
+    border-radius:14px;
+    padding:20px;
+    display:flex;flex-direction:column;gap:10px;
+    border:1px solid var(--line);
+    background:var(--panel);
+    min-height:150px;
+  }
+  .quad.hero{
+    background:linear-gradient(165deg, rgba(200,255,0,0.10), var(--panel) 55%);
+    border:1px solid rgba(200,255,0,0.55);
+  }
+  .quad.muted{opacity:.72;}
+  .quad-badge{
+    align-self:flex-start;
+    font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;
+    border-radius:999px;padding:5px 10px;
+  }
+  .quad-badge.lead{background:var(--lime);color:var(--bg);}
+  .quad-badge.support{background:var(--card-soft);color:var(--text-3);border:1px solid var(--line-strong);}
+  .quad h3{font-size:17px;}
+  .quad .desc{font-size:14px;color:var(--text-2);line-height:1.5;}
+  .quad .note{font-size:12.5px;color:var(--text-3);border-top:1px dashed var(--line-strong);padding-top:10px;line-height:1.45;}
+
+  .focus-line{
+    font-size:18px;
+    color:var(--text);
+    font-family:var(--font-display);
+    font-weight:600;
+    line-height:1.35;
+    max-width:680px;
+  }
+
+  /* ---------- industries ---------- */
+  .chip-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{
+    border-radius:999px;
+    border:1px solid var(--line-strong);
+    background:var(--panel);
+    color:var(--text-2);
+    font-size:13.5px;
+    padding:9px 16px;
+    cursor:pointer;
+  }
+  .chip[aria-pressed="true"]{background:var(--indigo);border-color:var(--indigo);color:var(--text);}
+  .chip:not([aria-pressed="true"]):hover{border-color:var(--text-3);}
+
+  .legend{font-size:13px;color:var(--text-3);line-height:1.5;}
+  .legend b{color:var(--text-2);}
+
+  .tp-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+  }
+  @media (max-width:760px){ .tp-grid{grid-template-columns:1fr;} }
+
+  .tp-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:20px;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .tp-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;}
+  .tp-where{font-family:var(--font-display);font-size:16.5px;font-weight:600;color:var(--text);line-height:1.3;}
+  .tp-badge{
+    flex:none;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;font-weight:700;
+    border-radius:999px;padding:5px 10px;white-space:nowrap;
+  }
+  .tp-badge.lead{background:var(--lime-soft);color:var(--lime);border:1px solid rgba(200,255,0,0.4);}
+  .tp-badge.website{background:var(--indigo-soft);color:#8C95FF;border:1px solid rgba(91,91,255,0.45);}
+  .tp-badge.blend{background:var(--card-soft);color:var(--text-3);border:1px solid var(--line-strong);}
+  .tp-field{display:flex;flex-direction:column;gap:4px;}
+  .tp-field .label{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);font-weight:600;}
+  .tp-field .val{font-size:14px;color:var(--text-2);line-height:1.5;}
+  .tp-field.answer .val{color:var(--text);}
+  .tp-field.demo{border-top:1px solid var(--line);padding-top:12px;}
+
+  /* ---------- footer nav ---------- */
+  .panel-nav{
+    display:flex;justify-content:space-between;align-items:center;
+    padding-top:8px;
+  }
+  .navbtn{
+    display:flex;align-items:center;gap:8px;
+    background:var(--card);color:var(--text);
+    border:none;border-radius:999px;
+    padding:12px 20px;font-size:14px;font-weight:600;cursor:pointer;
+  }
+  .navbtn.primary{background:var(--lime);color:var(--bg);}
+  .navbtn:disabled{opacity:.4;cursor:default;}
+  .navbtn.ghost{background:transparent;color:var(--text-3);}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding-block:22px 40px;
+    font-size:12.5px;
+    color:var(--text-3);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  }
+
+  [hidden]{display:none!important;}
+</style>
+
+<div class="shell">
+
+  <header class="topbar">
+    <div class="wordmark">
+      <div class="name"><b>Medallia</b> Digital Context Engine</div>
+      <div class="tool">An interactive walkthrough for the frontline</div>
     </div>
+  </header>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const issueTextarea = document.getElementById('issueTextarea');
-            const recommendBtn = document.getElementById('recommendBtn');
-            const recommendationDisplay = document.getElementById('recommendationDisplay');
+  <nav class="stepnav" role="tablist" aria-label="Tool steps">
+    <button class="step-pill" role="tab" id="tab-1" data-step="1" aria-selected="true"><span class="num">1</span>Our focus</button>
+    <span class="step-arrow">&rarr;</span>
+    <button class="step-pill" role="tab" id="tab-2" data-step="2" aria-selected="false"><span class="num">2</span>Where it happens</button>
+  </nav>
 
-            recommendBtn.addEventListener('click', () => {
-                const issue = issueTextarea.value.trim().toLowerCase();
-                let recommendations = "";
+  <main>
 
-                if (issue === "") {
-                    recommendations = "Please enter a customer issue or business challenge to receive recommendations.";
-                } else if (issue.includes("login") || issue.includes("account") || issue.includes("password") || issue.includes("registration") || issue.includes("access") || issue.includes("form")) {
-                    recommendations = `For issues related to accounts, logins, and forms, start with these DXA features:
-                    
-• Form Analytics: Automatically scores the ease and usability of forms. Use this to identify where users are struggling, such as high abandonment rates or specific field errors.
+    <!-- ============ FOCUS ============ -->
+    <section class="panel" id="panel-1" role="tabpanel" aria-labelledby="tab-1">
+      <div class="head-block">
+        <div class="eyebrow">Step 1 of 2</div>
+        <h1 class="headline">One spectrum, one sweet spot</h1>
+        <p class="dek">Digital experience spans everything below, and Medallia can cover all of it. Leading with all of it is how buyers and sellers both lose focus. We lead top right.</p>
+      </div>
 
-• Technical Performance Reports: Check for JavaScript or HTTP errors that might be preventing the form from submitting correctly.
+      <div class="quad-wrap">
+        <div class="axis-top">Human behavior</div>
+        <div class="quad-row">
+          <div class="axis-side">Implicit &nbsp;(observed)</div>
+          <div class="quad-grid">
+            <div class="quad">
+              <span class="quad-badge support">Pairs well with feedback</span>
+              <h3>Behavioral body language <span style="color:var(--text-3);font-weight:500;">(DXA)</span></h3>
+              <p class="desc">Micro-interactions, navigation patterns, friction, rage clicks, scroll depth, session replay.</p>
+            </div>
+            <div class="quad hero">
+              <span class="quad-badge lead">Where we lead</span>
+              <h3>Conversational signals</h3>
+              <p class="desc">In-the-moment feedback, app notifications, ratings, chat transcripts, sentiment analysis.</p>
+              <p class="note">This is what Medallia does best, and where the whitespace still exists.</p>
+            </div>
+            <div class="quad muted">
+              <span class="quad-badge support">Supporting signal</span>
+              <h3>Technical telemetry</h3>
+              <p class="desc">Page load duration, DOM render time, API wait time, HTTP status errors, JS console errors.</p>
+              <p class="note">Where DXA alone gets stuck. Re-focus on value-driving features and readouts, or pair it with feedback.</p>
+            </div>
+            <div class="quad muted">
+              <span class="quad-badge support">Supporting signal</span>
+              <h3>Form &amp; interaction signals</h3>
+              <p class="desc">Element-level error triggers, field abandonment rate, completion velocity, repetitive re-entry.</p>
+              <p class="note">Where DXA alone gets stuck. Re-focus on value-driving features and readouts, or pair it with feedback.</p>
+            </div>
+          </div>
+          <div class="axis-side" style="transform:rotate(0deg);">Explicit &nbsp;(stated)</div>
+        </div>
+        <div class="axis-bottom">Technical performance</div>
+      </div>
 
-• Session Replay: Watch video-accurate recordings of sessions to visually see exactly where the user is getting stuck or frustrated on the login page or form.`;
-                } else if (issue.includes("cancel") || issue.includes("service") || issue.includes("journey") || issue.includes("process")) {
-                    recommendations = `For business challenges related to customer journeys like service cancellations, focus on these DXA features:
+      <p class="focus-line">Meet customers where they are, through the app, and fill the gaps with chat data. That's the story we lead with across verticals on the next screen.</p>
 
-• Funnels & Customer Journeys: Visualize the exact path visitors take and where they are dropping off in the cancellation process.
+      <div class="callout">
+        <b>Why not sell all four quadrants?</b> We can, and for the right account we eventually will. But opening with the full spectrum is what confuses buyers into a generic "analytics" conversation and sellers into a generic pitch. Opening with conversational signals gets a faster yes, opens up the budget of the digital buyer, and it's the quadrant competitors have left open.
+      </div>
 
-• Session Replay: Watch sessions of users who successfully or unsuccessfully attempted to cancel to understand their experience and identify friction points.
+      <div class="panel-nav">
+        <span></span>
+        <button class="navbtn primary" data-goto="2">See this by industry &rarr;</button>
+      </div>
+    </section>
 
-• Discover Reports: Use reports to analyze traffic sources and segments to see if specific user groups are more likely to cancel.`;
-                } else if (issue.includes("friction") || issue.includes("malfunction") || issue.includes("error") || issue.includes("stuck")) {
-                    recommendations = `To understand and resolve digital friction, use these DXA features:
+    <!-- ============ INDUSTRIES ============ -->
+    <section class="panel" id="panel-2" role="tabpanel" aria-labelledby="tab-2" hidden>
+      <div class="head-block">
+        <div class="eyebrow">Step 2 of 2</div>
+        <h1 class="headline">Where it happens</h1>
+        <p class="dek">Same play, ten industries. Pick the one your prospect will recognize themselves in, digital experience is abstract until someone can point at their own moment in it.</p>
+      </div>
 
-• Behavioral Intelligence: Analyze frustration metrics like 'unresponsive clicks', 'rapid cursor movements', and 'over-scrolling' to quantify friction.
+      <div class="chip-row" id="chip-row"></div>
 
-• DXS (Digital Experience Score) & Pillar Scores: Use the overall DXS and pillar scores for Frustration, Technical, and Navigation to identify pages or segments with high friction.
+      <p class="legend"><b>App-led</b> and <b>chat-led</b> badges are the conversational-signal pattern from step 1, where we lead. <b>Website-led</b> touchpoints pair DXA behavior with feedback, still solid, just a different quadrant. <b>Blended signal</b> touchpoints still work, they're just not the opener.</p>
 
-• Session Replay: Watch sessions with low DXS scores or high frustration signals to see firsthand what is causing the struggle.`;
-                } else if (issue.includes("load") || issue.includes("slow") || issue.includes("technical")) {
-                    recommendations = `For technical and performance issues like slow loading or malfunctions, use these DXA features:
+      <div class="tp-grid" id="tp-grid"></div>
 
-• Technical Performance Reports: Dive into metrics like average load time and JavaScript error rates to pinpoint the root cause of the slowness.
+      <div class="panel-nav">
+        <button class="navbtn ghost" data-goto="1">&larr; Back</button>
+        <span></span>
+      </div>
+    </section>
 
-• Behavioral Intelligence: Analyze frustration metrics like 'unresponsive clicks' and 'rapid cursor movements' to see the user's struggle as the page loads.
+  </main>
 
-• Session Replay: Watch sessions with a low technical score to see the user's experience in real-time and identify the moment of frustration.`;
-                } else if (issue.includes("chat") || issue.includes("feature")) {
-                    recommendations = `For feature-specific issues like chat functionality, use these DXA features:
+  <footer>
+    <span>Prepared by Spencer Thomas &middot; September 2026</span>
+  </footer>
 
-• Tracked Events: Monitor specific button clicks or interactions related to the feature in question.
+</div>
 
-• Session Replay: Watch user sessions to see the context surrounding the use of the feature and what may be causing the problem.
+<script>
+(function(){
 
-• Alerts: Set up real-time alerts to notify you when a user engages with the feature and encounters a problem.`;
-                } else if (issue.includes("content") || issue.includes("design") || issue.includes("layout") || issue.includes("experience")) {
-                    recommendations = `For issues related to content quality or design, use these DXA features:
+  // ---------------- industries ----------------
+  var INDUSTRIES = [
+    { name:"Retail", touchpoints:[
+      { where:"E-commerce site & app checkout", need:"Where do carts get abandoned, and does that match what shoppers say about checkout friction?", answer:"Feedback capture paired with DXA sessions, funnel/cart analysis, and chat transcripts related to checkout process.", demo:"Replay an abandoned-cart session pulled alongside an Adobe Analytics funnel view, next to the low-CSAT comment from that same visit.", tag:"chat" },
+      { where:"In-store digital (self-checkout, kiosk, QR-to-app)", need:"Does the in-store digital moment reduce friction, or create a new complaint?", answer:"Enhanced survey distribution: an app or SMS survey triggered right at checkout, tied to store location.", demo:"A short, passive SMS survey fired from the register at checkout, no app required, rolling into the same store-level complaint view.", tag:"app" },
+      { where:"Mobile app (loyalty, browse, buy)", need:"Are loyalty members using the app to buy, or just to browse and leave?", answer:"In-app feedback paired with DXA Mobile, one shared SDK.", demo:"A passive in-app intercept shown after browsing without buying, compared in one view to that loyalty tier's session behavior.", tag:"app" },
+      { where:"Contact center & chat (order support)", need:"When a shopper contacts support about an order, what were they doing online right before?", answer:"MEC transcript and call analytics, combined with digital feedback following chat interaction (with DXA session context).", demo:"One MEC report combining the chat transcript, the post-chat feedback score, and the web session that preceded the contact, for a single order-support journey.", tag:"chat" }
+    ]},
+    { name:"Finance", touchpoints:[
+      { where:"Online banking website & portal", need:"Are customers completing high-stakes tasks (transfers, applications) without abandoning out of confusion or distrust?", answer:"Feedback capture and chat analytics paired with DXA behavioral analytics.", demo:"A loan or account-opening abandonment, cross-referenced with an Adobe Target experiment live on the same page, next to the verbatim reason given.", tag:"website" },
+      { where:"Mobile banking app", need:"Is the app trusted enough to replace a branch or call for routine tasks?", answer:"In-app feedback paired with DXA Mobile, one shared SDK.", demo:"A passive in-app prompt shown right after a failed transfer, compared to the friction point in that same session.", tag:"app" },
+      { where:"Contact center (calls & chat)", need:"Did a digital error or dead end drive this call, and could it have been prevented?", answer:"MEC call and chat analytics, combined with digital feedback following chat interaction (with DXA session context).", demo:"An Insights Assistant summary combining call transcripts, chat, and DXA error events into one root-cause view for “can't complete transfer” calls.", tag:"chat" },
+      { where:"Advisor & relationship-manager tools", need:"Are advisors getting the signal they need to act before a client complains or leaves?", answer:"Digital feedback & DXA alerts related to tools satisfaction and friction.", demo:"An advisor-facing book-of-business view, one combined MEC report blending recent digital friction with survey sentiment.", tag:"blend" }
+    ]},
+    { name:"Hospitality", touchpoints:[
+      { where:"Booking website & app", need:"Where do guests abandon a booking, and is it price, dates, or a broken flow?", answer:"Feedback capture and chat analytics paired with DXA behavioral analytics.", demo:"Booking-funnel drop-off pulled next to an Adobe Analytics segment, alongside guest comments about rate or date confusion.", tag:"website" },
+      { where:"In-stay mobile app (digital key, room service, concierge)", need:"Are guests actually using in-stay digital features, or defaulting to the front desk?", answer:"In-app feedback paired with DXA Mobile.", demo:"A passive in-app prompt triggered right after a digital-key failure, compared to front-desk call volume for the same property.", tag:"app" },
+      { where:"Post-stay & loyalty feedback", need:"Does a bad digital check-in experience predict a bad review or a lost loyalty renewal?", answer:"Feedback signal capture trended against digital behavior.", demo:"A passive post-stay app survey, trended against check-in friction and rebooking rate at the property level.", tag:"blend" },
+      { where:"Kiosk & QR (lobby, in-room)", need:"Does the physical-to-digital handoff (QR menu, lobby kiosk) work, or create a support call?", answer:"Enhanced survey distribution: an app or SMS survey triggered the moment a lobby or in-room interaction ends.", demo:"A lobby kiosk interaction that fires a short passive app survey on the spot, rolling into QR-ordering complaint volume by property.", tag:"app" }
+    ]},
+    { name:"Healthcare", touchpoints:[
+      { where:"Patient portal (website & app)", need:"Can patients complete essential tasks (scheduling, refills, bill pay) without calling in?", answer:"Feedback capture and chat analytics paired with DXA behavioral analytics, configured for PII.", demo:"A passive post-scheduling intercept, correlated with call volume for the same task.", tag:"website" },
+      { where:"Telehealth / virtual visit", need:"Do technical breakdowns in the virtual visit erode trust in the care itself?", answer:"Post-visit feedback paired with DXA session data.", demo:"One combined MEC view pairing the telehealth session's technical drop-off with the post-visit satisfaction score.", tag:"blend" },
+      { where:"Contact center (scheduling, billing, nurse lines)", need:"Did a digital dead end cause this call, and is it billing, scheduling, or clinical?", answer:"MEC call and chat analytics, combined with digital feedback following chat interaction (with DXA session context).", demo:"Insights Assistant tagging that separates digitally fixable calls from genuine clinical need, built from combined call, chat, and session data.", tag:"chat" },
+      { where:"Member/patient mobile app", need:"Does app friction correlate with disenrollment risk (payer) or no-show risk (provider)?", answer:"In-app feedback paired with DXA Mobile.", demo:"A passive in-app prompt after a failed self-service task, trended against a disenrollment or no-show cohort.", tag:"app" }
+    ]},
+    { name:"Utility", touchpoints:[
+      { where:"Website & self-service portal (billing, outage, usage)", need:"Can customers self-serve bill pay and outage reporting, or does every issue become a call?", answer:"Feedback capture and chat analytics paired with DXA behavioral analytics.", demo:"Outage-reporting abandonment, cross-referenced with an Adobe Analytics spike, right before a call-volume spike during a live outage.", tag:"website" },
+      { where:"Mobile app (usage tracking, outage alerts, bill pay)", need:"Do customers trust the app enough to check outage status instead of calling during an event?", answer:"In-app feedback paired with DXA Mobile.", demo:"A passive in-app prompt during a live outage window, compared to contact-center volume for that same window.", tag:"app" },
+      { where:"Contact center (billing, outage, service requests)", need:"Is this call about something the digital channel should have resolved?", answer:"MEC call and chat analytics, combined with digital feedback following chat interaction (with DXA session context).", demo:"A “digitally deflectable call” report combining session, chat, and call-reason data in one MEC view.", tag:"chat" },
+      { where:"SMS & IVR outage alerts", need:"Did the proactive alert reach the customer in time, and did it reduce the need to call?", answer:"Enhanced survey distribution: app notification or SMS following the outage alert.", demo:"A short passive SMS survey sent right after the outage alert, measuring whether the alert actually reduced the urge to call.", tag:"app" }
+    ]},
+    { name:"Telco", touchpoints:[
+      { where:"Website & self-service portal (plans, billing, troubleshooting)", need:"Are customers resolving plan and billing issues online, or bailing to a store or call?", answer:"Feedback capture and chat analytics paired with DXA behavioral analytics.", demo:"A troubleshooting-flow abandonment, pulled alongside an Adobe Analytics segment, next to the verbatim complaint about the same issue.", tag:"website" },
+      { where:"Mobile app (account management, troubleshooting)", need:"Is the app reducing store and call volume, or just adding a channel nobody trusts?", answer:"In-app feedback paired with DXA Mobile, one shared SDK.", demo:"A passive in-app prompt after a failed troubleshooting flow, correlated with same-day store visit data.", tag:"app" },
+      { where:"Contact center & chat (support, retention)", need:"What was the customer doing digitally right before they called to cancel?", answer:"MEC call and chat analytics, combined with digital feedback following chat interaction (with DXA session context).", demo:"A churn-save view built from Insights Assistant, combining session, chat, and call data to show the digital friction that preceded a cancellation call.", tag:"chat" },
+      { where:"In-store & kiosk (device pickup, bill pay)", need:"Does the digital appointment or reservation experience match what happens in the store?", answer:"Enhanced survey distribution: an app or SMS survey triggered right after device pickup or a bill-pay visit.", demo:"A post-visit passive SMS survey fired at checkout, tied back to appointment-booking friction online.", tag:"app" }
+    ]},
+    { name:"Insurance", touchpoints:[
+      { where:"Website & quote/policy portal", need:"Do prospects abandon a quote because of price shock, confusion, or a broken form?", answer:"Feedback capture and chat analytics paired with DXA behavioral analytics.", demo:"Quote-flow abandonment by step, cross-referenced with an Adobe Target test, next to the exit-survey reason.", tag:"website" },
+      { where:"Claims filing (web & app)", need:"Is claims filing digitally smooth enough to prevent a call in an already stressful moment?", answer:"In-app feedback paired with DXA behavioral analytics.", demo:"A passive post-submission survey after a claims-flow error, mapped to a spike in adjuster calls and claimant sentiment.", tag:"app" },
+      { where:"Contact center (claims, policy service)", need:"Did a digital claims dead end escalate an already stressful moment into a complaint?", answer:"MEC call and chat analytics, combined with digital feedback following chat interaction (with DXA session context).", demo:"Claims-portal errors linked to escalated call transcripts in one combined MEC report.", tag:"chat" },
+      { where:"Agent & broker portal", need:"Are agents able to service policies digitally, or working around the system?", answer:"Feedback capture and chat analytics paired with DXA behavioral analytics (internal-facing).", demo:"Agent-portal friction correlated with policy-service call volume from agents themselves, in one combined MEC view.", tag:"chat" }
+    ]},
+    { name:"Pharma", touchpoints:[
+      { where:"Patient support & brand website", need:"Can patients find eligibility and savings information without abandoning out of confusion?", answer:"Feedback capture and chat analytics paired with DXA behavioral analytics, configured for pharmacovigilance.", demo:"An eligibility-flow abandonment point next to a verbatim, shown alongside how open-ended text is masked for compliance.", tag:"website" },
+      { where:"Patient support mobile app (adherence, refill reminders)", need:"Are patients using the app to stay adherent, or dropping off after enrollment?", answer:"In-app feedback paired with DXA Mobile.", demo:"A passive in-app adherence check-in, correlated with refill-reminder response.", tag:"app" },
+      { where:"HCP (prescriber) portal", need:"Are prescribers completing enrollment or prior authorization digitally, or defaulting to phone and fax?", answer:"Feedback capture and chat analytics paired with DXA behavioral analytics (HCP-facing).", demo:"HCP portal friction tied to call-in volume for enrollment support.", tag:"chat" },
+      { where:"Patient support contact center / nurse line", need:"Did a digital dead end cause this call, separate from a genuine clinical or adverse-event report?", answer:"MEC call and chat analytics, combined with digital feedback following chat interaction (with DXA session context), with adverse-event triage kept separate.", demo:"A split of “digitally resolvable” versus clinical call reasons, built from one combined MEC view of call, chat, and session data.", tag:"chat" }
+    ]},
+    { name:"Automotive", touchpoints:[
+      { where:"Dealer/OEM website & configurator", need:"Where do shoppers abandon a build-and-price or configurator flow, and is it price, options, or a broken tool?", answer:"Feedback capture and chat analytics paired with DXA behavioral analytics.", demo:"A configurator abandonment step, cross-referenced with an Adobe Target experiment, next to the exit-survey reason for leaving.", tag:"website" },
+      { where:"Connected car / owner app (service scheduling, remote features)", need:"Are owners using the app for service and remote features, or defaulting to calling the dealer?", answer:"In-app feedback paired with DXA Mobile, one shared SDK.", demo:"A passive in-app prompt after a failed remote-start or scheduling attempt, compared to dealer call volume for the same feature.", tag:"app" },
+      { where:"Service scheduling & dealer portal", need:"Is service scheduling digitally smooth enough to prevent a call to the dealership?", answer:"Feedback capture paired with DXA behavioral analytics.", demo:"A service-scheduling drop-off point correlated with dealership call volume for the same day.", tag:"blend" },
+      { where:"Contact center / dealer support (sales & service calls)", need:"What was the shopper or owner doing online right before they called the dealer?", answer:"MEC call and chat analytics, combined with digital feedback following chat interaction (with DXA session context).", demo:"One combined MEC report stitching a shopper's configurator session to the sales call that followed it.", tag:"chat" }
+    ]},
+    { name:"Employee Experience", touchpoints:[
+      { where:"Employee apps (frontline, field, retail associate)", need:"Are employees actually using the app to do their job, or working around it with texts, spreadsheets, or a manager?", answer:"Enhanced survey distribution: an app survey triggered following a key employee touchpoint.", demo:"A passive in-app prompt after a clock-in or task-completion flow, compared to a supervisor's workaround complaint.", tag:"app" },
+      { where:"Decentralized employees (shared terminals, kiosks, scanners)", need:"Can employees without a company email or personal device still surface friction and have it show up as a signal?", answer:"Digital feedback capture at the shared terminal, paired with behavioral analytics on the shared-device session.", demo:"A shift-level view of terminal error rates next to end-of-shift passive feedback from the floor.", tag:"blend" },
+      { where:"Internal employee portal (intranet, HR, IT self-service)", need:"Can employees self-serve HR and IT tasks (benefits, PTO, ticket submission), or does everything end up with the help desk?", answer:"Feedback capture paired with DXA behavioral analytics, on the internal portal.", demo:"A benefits-enrollment abandonment point correlated with HR help-desk ticket volume for the same week, in one combined MEC-style view.", tag:"blend" }
+    ]}
+  ];
 
-• Heatmaps: Visualize on-page engagement with behavioral, attribution, scroll, and dot heatmaps to see where users are clicking and where they are getting stuck.
+  var TAG_LABEL = { app:"App-led", chat:"Chat-led", website:"Website-led", blend:"Blended signal" };
+  var TAG_CLASS = { app:"lead", chat:"lead", website:"website", blend:"blend" };
 
-• Session Replay: Watch user sessions to see how visitors interact with the page's design and layout, and if they are able to find the information they are looking for.`;
-                } else if (issue.includes("navigation") || issue.includes("navigate") || issue.includes("stuck") || issue.includes("loop") || issue.includes("sucks")) {
-                    recommendations = `For issues related to navigation, use these DXA features:
+  var chipRow = document.getElementById("chip-row");
+  var tpGrid = document.getElementById("tp-grid");
 
-• Navigation Score: A session-based score that measures how easy it is for users to navigate your site. A low score here indicates a problem.
+  INDUSTRIES.forEach(function(ind, idx){
+    var chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "chip";
+    chip.textContent = ind.name;
+    chip.setAttribute("aria-pressed", idx === 0 ? "true" : "false");
+    chip.addEventListener("click", function(){ selectIndustry(idx); });
+    chipRow.appendChild(chip);
+  });
 
-• Funnels & Customer Journeys: Visualize the exact path visitors take and identify where they are getting stuck or looping back to previous pages.
+  function selectIndustry(idx){
+    Array.prototype.forEach.call(chipRow.children, function(chip, i){
+      chip.setAttribute("aria-pressed", i === idx ? "true" : "false");
+    });
+    tpGrid.innerHTML = "";
+    INDUSTRIES[idx].touchpoints.forEach(function(tp){
+      var card = document.createElement("div");
+      card.className = "tp-card";
+      card.innerHTML =
+        '<div class="tp-top"><div class="tp-where">'+tp.where+'</div>' +
+        '<span class="tp-badge '+TAG_CLASS[tp.tag]+'">'+TAG_LABEL[tp.tag]+'</span></div>' +
+        '<div class="tp-field"><div class="label">What they need to know</div><div class="val">'+tp.need+'</div></div>' +
+        '<div class="tp-field answer"><div class="label">The Medallia answer</div><div class="val">'+tp.answer+'</div></div>' +
+        '<div class="tp-field demo"><div class="label">What to demo</div><div class="val">'+tp.demo+'</div></div>';
+      tpGrid.appendChild(card);
+    });
+  }
+  selectIndustry(0);
 
-• Behavioral Intelligence & Session Replay: Look for specific behavioral signals like 'stuck on screen', 'stuck on screen loop', or 'go back using navigation' to pinpoint the precise moment of user frustration.`;
-                } else {
-                    recommendations = `I'm sorry, I don't have a specific recommendation for that issue based on the provided content. 
-<a onclick="KAMPYLE_ONSITE_SDK.showForm(40084)" class="recommendation-link">No results? Share your query so we can improve the workflow.</a>`;
-                }
-                recommendationDisplay.innerHTML = recommendations;
-            });
-        });
-    </script>
-<script type="text/javascript" src="https://resources.digital-cloud-west.medallia.com/wdcwest/109824/onsite/embed.js" async></script>
+  // ---------------- step navigation ----------------
+  var tabs = [1,2];
+  function goto(step){
+    tabs.forEach(function(n){
+      document.getElementById("panel-"+n).hidden = (n !== step);
+      document.getElementById("tab-"+n).setAttribute("aria-selected", n === step ? "true" : "false");
+    });
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+  tabs.forEach(function(n){
+    document.getElementById("tab-"+n).addEventListener("click", function(){ goto(n); });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-goto]"), function(btn){
+    btn.addEventListener("click", function(){ goto(parseInt(btn.getAttribute("data-goto"), 10)); });
+  });
 
+})();
+</script>
 </body>
 </html>
