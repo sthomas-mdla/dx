@@ -224,6 +224,22 @@
   .tp-badge.lead{background:var(--lime-soft);color:var(--lime);border:1px solid rgba(200,255,0,0.4);}
   .tp-badge.website{background:var(--indigo-soft);color:#8C95FF;border:1px solid rgba(91,91,255,0.45);}
   .tp-badge.blend{background:var(--card-soft);color:var(--text-3);border:1px solid var(--line-strong);}
+  .tp-badge.now{background:var(--card-soft);color:var(--text-3);border:1px solid var(--line-strong);}
+  .tp-badge.watch{background:var(--indigo-soft);color:#8C95FF;border:1px solid rgba(91,91,255,0.45);}
+
+  /* ---------- competitive cards ---------- */
+  .tp-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media (max-width:900px){ .tp-grid-3{grid-template-columns:1fr;} }
+  .sub-head{display:flex;align-items:baseline;gap:10px;margin-bottom:2px;}
+  .sub-head h3{font-size:15px;color:var(--text);}
+  .sub-head .sub-note{font-size:12.5px;color:var(--text-3);}
+  .watch-num{
+    width:26px;height:26px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--indigo);color:var(--text);
+    font-family:var(--font-display);font-weight:700;font-size:12px;
+    flex:none;
+  }
   .tp-field{display:flex;flex-direction:column;gap:4px;}
   .tp-field .label{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);font-weight:600;}
   .tp-field .val{font-size:14px;color:var(--text-2);line-height:1.5;}
@@ -269,6 +285,8 @@
     <button class="step-pill" role="tab" id="tab-1" data-step="1" aria-selected="true"><span class="num">1</span>Our focus</button>
     <span class="step-arrow">&rarr;</span>
     <button class="step-pill" role="tab" id="tab-2" data-step="2" aria-selected="false"><span class="num">2</span>Where it happens</button>
+    <span class="step-arrow">&rarr;</span>
+    <button class="step-pill" role="tab" id="tab-3" data-step="3" aria-selected="false"><span class="num">3</span>Competitive Pressure</button>
   </nav>
 
   <main>
@@ -276,8 +294,8 @@
     <!-- ============ FOCUS ============ -->
     <section class="panel" id="panel-1" role="tabpanel" aria-labelledby="tab-1">
       <div class="head-block">
-        <div class="eyebrow">Step 1 of 2</div>
-        <h1 class="headline">One spectrum, one sweet spot</h1>
+        <div class="eyebrow">Step 1 of 3</div>
+        <h1 class="headline">How Medallia Wins in Digital Experience</h1>
         <p class="dek">Digital experience spans everything below, and Medallia can cover all of it. Leading with all of it is how buyers and sellers both lose focus. We lead top right.</p>
       </div>
 
@@ -323,14 +341,14 @@
 
       <div class="panel-nav">
         <span></span>
-        <button class="navbtn primary" data-goto="2">See this by industry &rarr;</button>
+        <button class="navbtn primary" data-goto="2">Where it happens &rarr;</button>
       </div>
     </section>
 
     <!-- ============ INDUSTRIES ============ -->
     <section class="panel" id="panel-2" role="tabpanel" aria-labelledby="tab-2" hidden>
       <div class="head-block">
-        <div class="eyebrow">Step 2 of 2</div>
+        <div class="eyebrow">Step 2 of 3</div>
         <h1 class="headline">Where it happens</h1>
         <p class="dek">Same play, ten industries. Pick the one your prospect will recognize themselves in, digital experience is abstract until someone can point at their own moment in it.</p>
       </div>
@@ -343,6 +361,55 @@
 
       <div class="panel-nav">
         <button class="navbtn ghost" data-goto="1">&larr; Back</button>
+        <button class="navbtn primary" data-goto="3">Competitive pressure &rarr;</button>
+      </div>
+    </section>
+
+    <!-- ============ COMPETITIVE ============ -->
+    <section class="panel" id="panel-3" role="tabpanel" aria-labelledby="tab-3" hidden>
+      <div class="head-block">
+        <div class="eyebrow">Step 3 of 3</div>
+        <h1 class="headline">Competitive Pressure</h1>
+        <p class="dek">Much of Medallia's base is built on digital feedback, and competitors are seeing that as an opportunity to chip away at our base. There's a high number of Medallia customers that use digital feedback + a DXA competitor.</p>
+      </div>
+
+      <div>
+        <div class="sub-head"><h3>Headwinds today</h3><span class="sub-note">Already shaping how we sell</span></div>
+        <div class="tp-grid">
+          <div class="tp-card">
+            <div class="tp-top"><div class="tp-where">Competitor dominance in marketing &amp; CRO</div><span class="tp-badge now">Active today</span></div>
+            <div class="tp-field"><div class="val">Contentsquare and Quantum Metric have effectively captured traditional web-marketing and conversion-rate-optimization use cases, pushing Medallia to shift focus toward native app self-serve journeys and contact-center integration.</div></div>
+          </div>
+          <div class="tp-card">
+            <div class="tp-top"><div class="tp-where">Market perception of alternatives</div><span class="tp-badge now">Active today</span></div>
+            <div class="tp-field"><div class="val">Enterprise clients increasingly explore Contentsquare, Quantum Metric, and FullStory, drawn to their perceived ease of use and stronger dedicated digital-analytics capabilities.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sub-head"><h3>Headwinds we're watching</h3><span class="sub-note">An escalating sequence, not three unrelated risks</span></div>
+        <div class="tp-grid-3">
+          <div class="tp-card">
+            <div class="tp-top"><span class="watch-num">01</span><span class="tp-badge watch">Emerging</span></div>
+            <div class="tp-where">From behavioral tool to VOC provider</div>
+            <div class="tp-field"><div class="val">Quantum Metric historically served as a complementary behavioral-analytics and session-replay engine, often integrated with Medallia to attach session-replay links to Medallia feedback records. It has since expanded natively into Voice of Customer, adding direct survey capture, chat and call transcript ingestion, and AI-driven sentiment analysis.</div></div>
+          </div>
+          <div class="tp-card">
+            <div class="tp-top"><span class="watch-num">02</span><span class="tp-badge watch">Emerging</span></div>
+            <div class="tp-where">Encroaching on our core differentiator</div>
+            <div class="tp-field"><div class="val">By natively marrying real-time behavioral telemetry, automated session replay, and feedback surveys in a single platform, Quantum Metric now targets the exact value proposition Medallia is built on: combining what customers say with what they do.</div></div>
+          </div>
+          <div class="tp-card">
+            <div class="tp-top"><span class="watch-num">03</span><span class="tp-badge watch">Emerging</span></div>
+            <div class="tp-where">Rising vendor-consolidation risk</div>
+            <div class="tp-field"><div class="val">Quantum Metric's native VOC features let enterprises trigger behavioral surveys and predict non-responder sentiment without a third-party feedback tool, real pressure against Medallia's digital suite in any renewal or expansion conversation.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-nav">
+        <button class="navbtn ghost" data-goto="2">&larr; Back</button>
         <span></span>
       </div>
     </section>
@@ -457,7 +524,7 @@
   selectIndustry(0);
 
   // ---------------- step navigation ----------------
-  var tabs = [1,2];
+  var tabs = [1,2,3];
   function goto(step){
     tabs.forEach(function(n){
       document.getElementById("panel-"+n).hidden = (n !== step);
