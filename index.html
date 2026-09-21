@@ -240,6 +240,26 @@
     font-family:var(--font-display);font-weight:700;font-size:12px;
     flex:none;
   }
+  .quote{
+    font-family:var(--font-display);
+    font-size:17px;
+    font-weight:500;
+    color:var(--text);
+    line-height:1.5;
+    border-left:3px solid var(--indigo);
+    padding:4px 0 4px 18px;
+    margin:0;
+  }
+  .quote cite{
+    display:block;
+    margin-top:10px;
+    font-family:var(--font-body);
+    font-size:13px;
+    font-weight:400;
+    font-style:normal;
+    color:var(--text-3);
+  }
+
   .tp-field{display:flex;flex-direction:column;gap:4px;}
   .tp-field .label{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);font-weight:600;}
   .tp-field .val{font-size:14px;color:var(--text-2);line-height:1.5;}
@@ -388,23 +408,11 @@
       </div>
 
       <div>
-        <div class="sub-head"><h3>Headwinds we're watching</h3><span class="sub-note">An escalating sequence, not three unrelated risks</span></div>
-        <div class="tp-grid-3">
-          <div class="tp-card">
-            <div class="tp-top"><span class="watch-num">01</span><span class="tp-badge watch">Emerging</span></div>
-            <div class="tp-where">From behavioral tool to VOC provider</div>
-            <div class="tp-field"><div class="val">Quantum Metric historically served as a complementary behavioral-analytics and session-replay engine, often integrated with Medallia to attach session-replay links to Medallia feedback records. It has since expanded natively into Voice of Customer, adding direct survey capture, chat and call transcript ingestion, and AI-driven sentiment analysis.</div></div>
-          </div>
-          <div class="tp-card">
-            <div class="tp-top"><span class="watch-num">02</span><span class="tp-badge watch">Emerging</span></div>
-            <div class="tp-where">Encroaching on our core differentiator</div>
-            <div class="tp-field"><div class="val">By natively marrying real-time behavioral telemetry, automated session replay, and feedback surveys in a single platform, Quantum Metric now targets the exact value proposition Medallia is built on: combining what customers say with what they do.</div></div>
-          </div>
-          <div class="tp-card">
-            <div class="tp-top"><span class="watch-num">03</span><span class="tp-badge watch">Emerging</span></div>
-            <div class="tp-where">Rising vendor-consolidation risk</div>
-            <div class="tp-field"><div class="val">Quantum Metric's native VOC features let enterprises trigger behavioral surveys and predict non-responder sentiment without a third-party feedback tool, real pressure against Medallia's digital suite in any renewal or expansion conversation.</div></div>
-          </div>
+        <div class="sub-head"><h3>Headwinds we're watching</h3><span class="sub-note">In their own words</span></div>
+        <div class="tp-card">
+          <div class="tp-top"><div class="tp-where">Quantum Metric is naming the exact problem Medallia <i>should</i> solve</div><span class="tp-badge watch">Emerging</span></div>
+          <blockquote class="quote">&ldquo;A customer tells you something's wrong, and that comment goes to a different team, in a different tool, on a different timeline. By the time someone connects it back to what happened and decides it's worth fixing, the moment has passed.&rdquo;<cite>&mdash; Mario Ciabarra, CEO &amp; Founder, Quantum Metric</cite></blockquote>
+          <div class="tp-field"><div class="val">Their new tool stitches feedback, surveys, chat, support tickets, contact center interactions, directly to the behavioral session data behind it, then routes flagged issues into tools teams already use, like Jira, Slack, or Salesforce.</div></div>
         </div>
       </div>
 
